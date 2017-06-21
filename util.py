@@ -12,8 +12,7 @@ def dprint(string, speed):
         sys.stdout.flush()
         time.sleep(speed)
 
-def get_words(words_length):
-    NB_WORDS = 15
+def get_words(words_length, nb_words):
     words = []
 
     with open('words.txt', 'r') as file:
@@ -23,10 +22,11 @@ def get_words(words_length):
 
     random.shuffle(words)
 
-    return words[:NB_WORDS]
+    return words[:nb_words]
 
 def set_color(color):
     colors = {'green': '\033[0;32m',
-              'light green': '\033[1;32m'}
+              'light green': '\033[1;32m',
+              'red': '\033[1;31m'}
 
     print(colors[color], end='')
