@@ -5,8 +5,10 @@ import util
 def main():
     words = util.get_words(4)
     answer = random.choice(words)
+    grid = set_grid(words)
 
     show_intro()
+    show_grid(grid)
 
 def show_intro():
     util.clear()
@@ -15,6 +17,32 @@ def show_intro():
     time.sleep(0.1)
     print(" Password required\n")
     time.sleep(0.5)
+
+def set_grid(words):
+    ROWS = 30
+    DATA = ['!', '@', '#', '$', '%', '?', '&', '*',
+            '(', ')', ';', ',', '.', ':', "'", '^']
+    grid = []
+
+    for word in words:
+        string = ""
+        word_start = random.randint(0, ROWS - len(word))
+
+        for x in range(word_start):
+            string += random.choice(DATA)
+        string += word
+        for x in range(ROWS - word_start - len(word)):
+            string += random.choice(DATA)
+
+        grid.append(string)
+
+    return grid
+
+def show_grid(grid):
+    print('=' * len(grid[0]))
+    for line in grid:
+        util.dprint(line + '\n', 0.005)
+    print('=' * len(grid[0]))
 
 if __name__ == '__main__':
     main()
