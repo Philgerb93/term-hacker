@@ -7,6 +7,7 @@ def main():
     answer = random.choice(words)
     grid = set_grid(words)
 
+    util.set_color('green')
     show_intro()
     show_grid(grid)
 

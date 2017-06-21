@@ -24,3 +24,9 @@ def get_words(words_length):
     random.shuffle(words)
 
     return words[:NB_WORDS]
+
+def set_color(color):
+    colors = {'green': '\033[0;32m',
+              'light green': '\033[1;32m'}
+
+    print(colors[color], end='')
