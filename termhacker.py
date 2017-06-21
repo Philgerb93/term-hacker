@@ -85,8 +85,11 @@ def show_grid(grid):
             elif is_word and not char.isalpha():
                 util.set_color('green')
                 is_word = False
+            elif char == ' ':
+                util.set_color(word_highlight)
             print(char, end='')
         print('')
+        util.set_color('green')
     print('=' * COLS)
 
 def confirm_exit(attempts, grid):
