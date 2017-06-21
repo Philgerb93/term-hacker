@@ -20,19 +20,19 @@ def show_intro():
     time.sleep(0.5)
 
 def set_grid(words):
-    ROWS = 30
+    COLS = 30
     DATA = ['!', '@', '#', '$', '%', '?', '&', '*',
             '(', ')', ';', ',', '.', ':', "'", '^']
     grid = []
 
     for word in words:
         string = ""
-        word_start = random.randint(0, ROWS - len(word))
+        word_start = random.randint(0, COLS - len(word))
 
         for x in range(word_start):
             string += random.choice(DATA)
         string += word
-        for x in range(ROWS - word_start - len(word)):
+        for x in range(COLS - word_start - len(word)):
             string += random.choice(DATA)
 
         grid.append(string)
