@@ -1,7 +1,11 @@
+import random
 import time
 import util
 
 def main():
+    words = util.get_words(4)
+    answer = random.choice(words)
+
     show_intro()
 
 def show_intro():
