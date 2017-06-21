@@ -6,11 +6,18 @@ def main():
     words = util.get_words(4)
     answer = random.choice(words)
     grid = set_grid(words)
+    game_over = False
     attempts = 4
 
     util.set_color('green')
     show_intro(attempts, grid)
-    reprint(attempts, grid)
+
+    while (not game_over):
+        reprint(attempts, grid)
+        user_input = input('> ')
+
+        if len(user_input) == 0:
+            game_over = confirm_exit(attempts, grid)
 
 def set_grid(words):
     COLS = 30
@@ -57,6 +64,7 @@ def reprint(attempts, grid):
     print("Terminal hacking in progress... Password required\n")
     print("Attempts remaining : " + str(attempts))
     show_grid(grid)
+    print('')
 
 def show_grid(grid):
     is_word = False
@@ -73,6 +81,17 @@ def show_grid(grid):
             print(char, end='')
         print('')
     print('=' * len(grid[0]))
+
+def confirm_exit(attempts, grid):
+    while (True):
+        reprint(attempts, grid)
+        print("Quit the game? (Y/N)")
+
+        user_input = input('> ').lower()
+        if (user_input == 'y'):
+            return True
+        elif (user_input == 'n'):
+            return False
 
 if __name__ == '__main__':
     main()
