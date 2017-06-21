@@ -22,7 +22,7 @@ def main():
         if len(user_input) == 0:
             game_over = confirm_exit(attempts, grid)
         elif user_input in words:
-            game_over = validate_input(user_input, answer, words)
+            game_over = validate_input(user_input, answer, words, grid)
 
 
 def set_grid(words):
@@ -100,7 +100,7 @@ def confirm_exit(attempts, grid):
         elif (user_input == 'n'):
             return False
 
-def validate_input(user_input, answer, words):
+def validate_input(user_input, answer, words, grid):
     index = 0;
 
     if user_input == answer:
@@ -109,7 +109,19 @@ def validate_input(user_input, answer, words):
         while words[index] != user_input:
             index += 1
 
+        matches = calculate_matches(user_input, answer)
+        grid[index] += ' ' + str(matches)
+
         return False
+
+def calculate_matches(word, answer):
+    matches = 0
+
+    for x in range(len(word)):
+        if word[x] == answer[x]:
+            matches += 1
+
+    return matches
 
 if __name__ == '__main__':
     main()
