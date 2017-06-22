@@ -23,6 +23,7 @@ def main():
             game_over = confirm_exit(attempts, grid)
         elif user_input in words:
             game_over = validate_input(user_input, answer, words, grid)
+            attempts -= 1
 
     show_results(attempts, answer, grid)
 
