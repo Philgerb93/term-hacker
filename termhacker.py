@@ -83,11 +83,12 @@ def show_grid(grid):
             if not is_word and char.isalpha():
                 util.set_color(word_highlight)
                 is_word = True
+            elif char == ' ':
+                util.set_color(word_highlight)
+                is_word = False
             elif is_word and not char.isalpha():
                 util.set_color('green')
                 is_word = False
-            elif char == ' ':
-                util.set_color(word_highlight)
             print(char, end='')
         print('')
         util.set_color('green')
