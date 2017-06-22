@@ -15,7 +15,7 @@ def main():
     util.set_color('green')
     show_intro(attempts, grid)
 
-    while (not game_over and attempts > 0):
+    while not game_over and attempts > 0:
         reprint(attempts, grid)
         user_input = input('> ').upper()
 
@@ -96,14 +96,14 @@ def show_grid(grid):
     print('=' * COLS)
 
 def confirm_exit(attempts, grid):
-    while (True):
+    while True:
         reprint(attempts, grid)
         print("Quit the game? (Y/N)")
 
         user_input = input('> ').lower()
-        if (user_input == 'y'):
+        if user_input == 'y':
             return True
-        elif (user_input == 'n'):
+        elif user_input == 'n':
             return False
 
 def validate_input(user_input, answer, words, grid):
