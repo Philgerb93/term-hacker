@@ -26,7 +26,8 @@ def main():
                 confirm_exit(attempts, grid)
             elif user_input in words:
                 game_over = validate_input(user_input, answer, words, grid)
-                attempts -= 1
+                if not game_over:
+                    attempts -= 1
 
         playing = end_game(attempts, answer, words, grid)
 
@@ -138,7 +139,7 @@ def end_game(attempts, answer, words, grid):
             print("Hacking SUCCESSFUL")
         else:
             print("Hacking FAILED")
-        
+
         print("\nPlay again? (Y/N) ", end='')
         user_input = input('> ').lower()
         if user_input == 'y':
