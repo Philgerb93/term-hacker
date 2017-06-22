@@ -24,6 +24,7 @@ def main():
         elif user_input in words:
             game_over = validate_input(user_input, answer, words, grid)
 
+    show_results(attempts, answer, grid)
 
 def set_grid(words):
     DATA = ['!', '@', '#', '$', '%', '?', '&', '*',
@@ -125,6 +126,17 @@ def calculate_matches(word, answer):
             matches += 1
 
     return matches
+
+def show_results(attempts, answer, grid):
+    reprint(attempts, grid)
+    if attempts > 0:
+        util.dprint("Hacking SUCCESSFUL\n", 0.05)
+    else:
+        util.dprint("Hacking FAILED\n", 0.05)
+
+    util.dprint("Password : ", 0.05)
+    time.sleep(0.5)
+    print(answer)
 
 if __name__ == '__main__':
     main()
