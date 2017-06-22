@@ -27,6 +27,7 @@ def get_words(words_length, nb_words):
 def set_color(color):
     colors = {'green': '\033[0;32m',
               'light green': '\033[1;32m',
-              'red': '\033[1;31m'}
+              'red': '\033[1;31m',
+              'yellow': '\033[1;33m'}
 
     print(colors[color], end='')

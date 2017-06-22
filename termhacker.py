@@ -25,7 +25,7 @@ def main():
             game_over = validate_input(user_input, answer, words, grid)
             attempts -= 1
 
-    show_results(attempts, answer, grid)
+    show_results(attempts, answer, words, grid)
 
 def set_grid(words):
     DATA = ['!', '@', '#', '$', '%', '?', '&', '*',
@@ -66,21 +66,25 @@ def show_grid_intro(grid):
         util.dprint(line + '\n', 0.005)
     print('=' * COLS)
 
-def reprint(attempts, grid):
+def reprint(attempts, grid, answer_index=None):
     util.clear()
     print("Terminal hacking in progress... Password required\n")
     print("Attempts remaining : " + str(attempts))
-    show_grid(grid)
+    show_grid(grid, answer_index)
     print('')
 
-def show_grid(grid):
+def show_grid(grid, answer_index):
     is_word = False
 
     print('=' * COLS)
-    for line in grid:
-        word_highlight = 'light green' if len(line) == COLS else 'red'
+    for x in range(len(grid)):
+        if answer_index != None and answer_index == x:
+            word_highlight = 'yellow'
+            grid[x] += " <= PASSWORD"
+        else:
+            word_highlight = 'light green' if len(grid[x]) == COLS else 'red'
 
-        for char in line:
+        for char in grid[x]:
             if not is_word and char.isalpha():
                 util.set_color(word_highlight)
                 is_word = True
@@ -107,14 +111,10 @@ def confirm_exit(attempts, grid):
             return False
 
 def validate_input(user_input, answer, words, grid):
-    index = 0;
-
     if user_input == answer:
         return True
     else:
-        while words[index] != user_input:
-            index += 1
-
+        index = words.index(user_input)
         matches = calculate_matches(user_input, answer)
         grid[index] += ' ' + str(matches)
 
@@ -129,16 +129,12 @@ def calculate_matches(word, answer):
 
     return matches
 
-def show_results(attempts, answer, grid):
-    reprint(attempts, grid)
+def show_results(attempts, answer, words, grid):
+    reprint(attempts, grid, words.index(answer))
     if attempts > 0:
         util.dprint("Hacking SUCCESSFUL\n", 0.05)
     else:
         util.dprint("Hacking FAILED\n", 0.05)
-
-    util.dprint("Password : ", 0.05)
-    time.sleep(0.5)
-    print(answer)
 
 if __name__ == '__main__':
     main()
