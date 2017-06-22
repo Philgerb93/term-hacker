@@ -73,7 +73,12 @@ def show_grid_intro(grid):
 def reprint(attempts, grid):
     util.clear()
     print("Terminal hacking in progress... Password required\n")
-    print("Attempts remaining : " + str(attempts))
+    
+    print("Attempts remaining :", end=' ')
+    util.set_color('light green' if attempts > 0 else 'red')
+    print(str(attempts))
+    util.set_color('green')
+
     show_grid(grid)
     print('')
 
@@ -135,10 +140,15 @@ def end_game(attempts, answer, words, grid):
 
     while True:
         reprint(attempts, grid)
+
+        print('Hacking', end=' ')
         if attempts > 0:
-            print("Hacking SUCCESSFUL")
+            util.set_color('yellow')
+            print('SUCCESSFUL')
         else:
-            print("Hacking FAILED")
+            util.set_color('red')
+            print('FAILED')
+        util.set_color('green')
 
         print("\nPlay again? (Y/N) ", end='')
         user_input = input('> ').lower()
