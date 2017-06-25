@@ -9,13 +9,15 @@ COLS = 30
 def main():
     playing = True
     while playing:
-        words = util.get_words(4, ROWS)
+        util.set_color('green')
+
+        word_length = choose_difficulty()
+        words = util.get_words(word_length, ROWS)
         answer = random.choice(words)
         grid = set_grid(words)
         game_over = False
         attempts = 4
 
-        util.set_color('green')
         show_intro(attempts, grid)
 
         while playing and not game_over and attempts > 0:
@@ -30,6 +32,22 @@ def main():
                     attempts -= 1
 
         playing = end_game(attempts, answer, words, grid)
+
+def choose_difficulty():
+    while True:
+        util.clear()
+        print("Welcome to TERMINAL HACKER\n")
+        print("Available difficulties :\n"
+              "0 - NOVICE\n"
+              "1 - ADVANCED\n"
+              "2 - EXPERT\n"
+              "3 - MASTER\n")
+
+        print("Select (0-4)", end=' ')
+        user_input = input('> ')
+
+        if '0' <= user_input <= '3':
+            return int(user_input) + 4
 
 def set_grid(words):
     DATA = ['!', '@', '#', '$', '%', '?', '&', '*',
@@ -73,7 +91,7 @@ def show_grid_intro(grid):
 def reprint(attempts, grid):
     util.clear()
     print("Terminal hacking in progress... Password required\n")
-    
+
     print("Attempts remaining :", end=' ')
     util.set_color('light green' if attempts > 0 else 'red')
     print(str(attempts))
